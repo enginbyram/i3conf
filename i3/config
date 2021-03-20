@@ -1,0 +1,192 @@
+# ##############################
+# i3 WM config file
+# find more : https://i3wm.org/
+# Author : wizardpotato
+# ###############################
+
+# setting mod key to super key, or 'windows' key
+# and main font to Ubuntu Mono, and at 10 punto
+set $mod Mod4
+font pango:Ubuntu Mono 10
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec lux -a 20%
+bindsym XF86MonBrightnessDown exec lux -s 20%
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# KEYBINDINGS
+# execute terminal
+bindsym $mod+Return exec i3-sensible-terminal
+# start rofi (a nice program launcher I use, because my dmenu closes when inputted)
+bindsym $mod+Shift+Return exec rofi -show run
+# kill focused window
+bindsym $mod+q kill
+# change focuses
+bindsym $mod+h focus left
+bindsym $mod+k focus right
+bindsym $mod+u focus up
+bindsym $mod+j focus down
+# alternatively, you can use the cursor keys to focus
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+# you can use the cursor keys to move the focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# split in horizontal orientation
+bindsym $mod+Shift+h split h
+# split in vertical orientation
+bindsym $mod+Shift+v split v
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container (this binding is disabled with a comment symbol. I dont know what binding it will get, but it wont be mod+d)
+#bindsym $mod+d focus child
+
+# STARTUPS
+
+# execute feh to draw a wallpaper
+exec_always feh --bg-scale ~/Pictures/Wallpapers/wallpaper.jpeg
+
+
+# WORKSPACES 
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 1:
+set $ws2 2:
+set $ws3 3:
+set $ws4 4:
+set $ws5 5:
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# switch to workspace
+bindsym $mod+1 workspace number 1:
+bindsym $mod+2 workspace number 2:
+bindsym $mod+3 workspace number 3:
+bindsym $mod+4 workspace number 4:
+bindsym $mod+5 workspace number 5:
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# RELOAD, REBOOT, POWEROFF, LOGOUT, RESTART KEYBINDINGS
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# RESIZING A WINDOW
+# to resize a window, you must activate the resizing mode first. It is done by pressing mod+r
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # In resize mode, you'll use arrow keys to resize
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# ELEMENTS
+
+# def border type is pixel, which eliminates title bar
+# but floating window borders are normal, which has titles
+default_border pixel
+default_floating_border normal
+
+# eliminates edge borders when there's no other window open in the same workspace
+hide_edge_borders smart
+
+# execute nitrogen to establish a wallpaper on screen and restore it
+exec_always [--no nitrogen --restore]
+
+# when in fullscreen, do not show popups
+# unless its belongs to the fullscreened application
+popup_during_fullscreen smart
+
+# STATUSBAR
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        position top
+	status_command i3status --config ~/.config/i3/i3status/config
+	output primary
+	tray_padding 5
+	font pango:Fira Mono Bold 9
+	separator_symbol "||"
+	colors {
+	background #2f3439
+   	statusline #E5E5E5
+   	separator  #ea4f59	
+
+        focused_workspace  #2f3439 #2f3439 #EA4F59
+        active_workspace   #2f3439 #2f3439 #7FE366
+        inactive_workspace #2f3439 #2f3439 #b4bbde
+        urgent_workspace   #2f3439 #2f3439 #ffffff
+        binding_mode       #2f3439 #2f3439 #ffffff
+    }	
+}
