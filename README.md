@@ -14,3 +14,8 @@ If I remember correctly, I used:
 * [nitrogen](https://wiki.archlinux.org/index.php/Nitrogen) - to draw a wallpaper on startup(not sure nitrogen's code is correct, beware)
 * [Fira Mono](https://fonts.google.com/specimen/Fira+Mono?preview.text_type=custom) - Fira font family comes default with pop!OS, and I love it. You can download it from web as I used it if you want to
 * [rofi](https://wiki.archlinux.org/index.php/Rofi) - to use as a execute menu. Its like a dmenu but I like it more, and I couldn't managed to get dmenu worked, so yeah I used it as a main app
+
+## Alternative config file(config_bumblebee)
+This is a config file with bumblebee-status. This config file does not have native i3bar, so you need to install it; and if you want to use the alternative, you need to rename it to "config".
+
+This file uses some modules that _uses_ external packages, so find what the modules are from bumblebee-status documentation, then find what packages they need(they are listed below the said modules).
