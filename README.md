@@ -13,4 +13,4 @@ If I remember correctly, I used:
 * [trayer](https://linuxx.info/trayer/) - to show trayer on most right side of status bar(probably comes with i3 package, not sure bout' dat)
 * [nitrogen](https://wiki.archlinux.org/index.php/Nitrogen) - to draw a wallpaper on startup(not sure nitrogen's code is correct, beware)
 * [Fira Mono](https://fonts.google.com/specimen/Fira+Mono?preview.text_type=custom) - Fira font family comes default with pop!OS, and I love it. You can download it from web as I used it if you want to
-* [rofi](https://wiki.archlinux.org/index.php/Rofi) - to use as a execute menu. Its like a dmenu but I like it more, and I couldn't managed to get dmenu worked, so yeah I used it as a main app  
+* [rofi](https://wiki.archlinux.org/index.php/Rofi) - to use as a execute menu. Its like a dmenu but I like it more, and I couldn't managed to get dmenu worked, so yeah I used it as a main app
